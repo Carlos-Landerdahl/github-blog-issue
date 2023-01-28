@@ -1,16 +1,28 @@
 import styled from 'styled-components'
 
-export const ImageContainer = styled.div`
+export const HomePageContainer = styled.main`
+  display: flex;
+  flex-direction: column;
+`
+
+export const ImageContainer = styled.header`
+  width: 100%;
+
+  position: relative;
+
   .imgBanner {
     width: 100%;
-    height: 296px;
+    height: 18.5rem;
+
     object-fit: cover;
   }
+
   .imgLogo {
-    position: absolute;
-    width: 148px;
-    height: 98px;
-    top: 15%;
+    width: 9.375rem;
+    height: 6.125rem;
+
+    position: relative;
+    top: -160px;
     left: 50%;
     transform: translate(-50%, -50%);
   }
