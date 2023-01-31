@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@types/styled-components": "^5.1.26",
+    "@uiball/loaders": "^1.2.6",
+    "axios": "^1.2.6",
     "phosphor-react": "^1.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
