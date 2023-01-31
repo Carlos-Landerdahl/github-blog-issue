@@ -24,6 +24,10 @@ export const CardContainer = styled.main`
 
   .cardImg {
     padding-left: 2rem;
+    img {
+      width: 148px;
+      border-radius: 8px;
+    }
   }
 `
 
@@ -91,4 +95,8 @@ export const CardInfo = styled.div`
 
     list-style-type: none;
   }
+`
+
+export const Loader = styled.div`
+  margin: 0 auto;
 `
