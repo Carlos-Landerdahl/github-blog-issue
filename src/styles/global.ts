@@ -43,7 +43,7 @@ export const Subtitle = styled.h2`
 export const SmallPrint = styled.p`
   font-style: normal;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 16px;
   line-height: 130%;
   color: ${(props) => props.theme['base-span']};
 `
