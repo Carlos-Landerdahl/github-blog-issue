@@ -1,11 +1,11 @@
 import { Title, Subtitle } from '../../../../styles/global'
-import imgProfile from '../../assets/imgPerfil.svg'
 import {
   CardContainer,
   CardContent,
   CardHeader,
   CardDescription,
   CardInfo,
+  Loader,
 } from './styles'
 import {
   ArrowSquareUpRight,
@@ -13,33 +13,76 @@ import {
   Buildings,
   Users,
 } from 'phosphor-react'
+import { fetchUser } from '../../../../lib/axios'
+import { useEffect, useState } from 'react'
+import { Orbit } from '@uiball/loaders'
+
+interface User {
+  login: string
+  id: number
+  avatar_url: string
+  name: string
+  company: string
+  followers: string
+  email: string
+  bio: string
+}
 
 export function CardProfile() {
+  const [user, setUser] = useState<User | null>(null)
+  const [error, setError] = useState<Error | null>(null)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await fetchUser('carlos-landerdahl')
+        setUser(data)
+      } catch (err) {
+        console.log(err)
+        setError(err as Error)
+      }
+    }
+    fetchData()
+  }, [])
+
+  if (error) {
+    return (
+      <Loader>
+        An error occurred while trying to fetch the user information. Please try
+        again later.
+      </Loader>
+    )
+  }
+
+  if (!user) {
+    return (
+      <Loader>
+        <Orbit size={35} color="#ffffff" />
+      </Loader>
+    )
+  }
+
   return (
     <CardContainer>
       <div className="cardImg">
-        <img src={imgProfile} alt="" />
+        <img src={user.avatar_url} alt="" />
       </div>
       <CardContent>
         <CardHeader>
-          <Title>Carlos Roberto</Title>
-          <a href="#">
+          <Title>{user.name}</Title>
+          <a href="https://github.com/Carlos-Landerdahl">
             Github
             <ArrowSquareUpRight size={18} />
           </a>
         </CardHeader>
         <CardDescription>
-          <Subtitle>
-            Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu
-            viverra massa quam dignissim aenean malesuada suscipit. Nunc,
-            volutpat pulvinar vel mass.
-          </Subtitle>
+          <Subtitle>{user.bio}</Subtitle>
         </CardDescription>
         <CardInfo>
           <ul>
             <li>
               <GithubLogo size={18} weight="fill" />
-              CarlosLR
+              {user.login}
             </li>
             <li>
               <Buildings size={18} weight="fill" />
@@ -47,7 +90,7 @@ export function CardProfile() {
             </li>
             <li>
               <Users size={18} weight="fill" />
-              21 seguidores
+              {user.followers} Seguidores
             </li>
           </ul>
         </CardInfo>
