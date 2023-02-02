@@ -16,6 +16,8 @@ import {
 import { fetchUser } from '../../../../lib/axios'
 import { useEffect, useState } from 'react'
 import { Orbit } from '@uiball/loaders'
+import { toast, Bounce } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 interface User {
   login: string
@@ -33,31 +35,40 @@ export function CardProfile() {
   const [error, setError] = useState<Error | null>(null)
 
   useEffect(() => {
+    const controller = new AbortController()
+    const errorMessage = 'Não foi possível, carregar as informações do perfil'
+
     const fetchData = async () => {
       try {
         const data = await fetchUser('carlos-landerdahl')
         setUser(data)
       } catch (err) {
-        console.log(err)
+        toast.error(errorMessage, {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          transition: Bounce,
+        })
         setError(err as Error)
       }
     }
     fetchData()
+
+    return () => {
+      console.log('Cancelando...')
+      controller.abort()
+    }
   }, [])
 
-  if (error) {
-    return (
-      <Loader>
-        An error occurred while trying to fetch the user information. Please try
-        again later.
-      </Loader>
-    )
-  }
-
   if (!user) {
+    console.log(error)
+
     return (
       <Loader>
-        <Orbit size={35} color="#ffffff" />
+        <Orbit color="white" />
       </Loader>
     )
   }

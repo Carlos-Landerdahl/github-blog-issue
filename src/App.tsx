@@ -1,3 +1,4 @@
+import { ToastContainer } from 'react-toastify'
 import { ThemeProvider } from 'styled-components'
 import { Homepage } from './pages/Home'
 import { GlobalStyle } from './styles/global'
@@ -8,6 +9,7 @@ function App() {
     <ThemeProvider theme={defaultTheme}>
       <Homepage />
       <GlobalStyle />
+      <ToastContainer />
     </ThemeProvider>
   )
 }

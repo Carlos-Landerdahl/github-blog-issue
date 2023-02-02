@@ -6,8 +6,12 @@ const api = axios.create({
 })
 
 export const fetchUser = async (username: string) => {
+  const controller = new AbortController()
+
   try {
-    const response = await api.get(`users/${username}`)
+    const response = await api.get(`users/${username}`, {
+      signal: controller.signal,
+    })
     return response.data
   } catch (error) {
     throw error

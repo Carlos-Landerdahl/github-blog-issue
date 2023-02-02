@@ -98,5 +98,12 @@ export const CardInfo = styled.div`
 `
 
 export const Loader = styled.div`
-  margin: 0 auto;
+  left: 50%;
+  top: 50%;
+  margin-left: -15px;
+  margin-top: -190px;
+  position: absolute;
+  width: 200px;
+  height: 100px;
+  color: #fff;
 `
