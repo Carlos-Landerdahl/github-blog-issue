@@ -7,6 +7,18 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  ::-webkit-scrollbar-track {
+    background-color: ${(props) => props.theme['base-post']};
+  }
+  ::-webkit-scrollbar {
+      width: 12px;
+      background: ${(props) => props.theme['base-border']};
+  }
+  ::-webkit-scrollbar-thumb {
+      background: ${(props) => props.theme['base-border']};
+      border-radius: 8px;
+  }
+
   :focus {
       outline: 0;
       box-shadow: 0 0 0 2px ${(props) => props.theme.blue};

@@ -42,6 +42,15 @@ export function CardProfile() {
       try {
         const data = await fetchUser('carlos-landerdahl')
         setUser(data)
+        toast.success('Seja bem vindo ao GITHUB - Blog', {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          transition: Bounce,
+        })
       } catch (err) {
         toast.error(errorMessage, {
           position: 'top-right',
@@ -58,7 +67,6 @@ export function CardProfile() {
     fetchData()
 
     return () => {
-      console.log('Cancelando...')
       controller.abort()
     }
   }, [])
